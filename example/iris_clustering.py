@@ -8,7 +8,7 @@ if __name__ == '__main__':
     dim = feature.shape[1]
     hypers = {
         'mu_0': np.zeros(dim),
-        'nu_0': 3.0,
+        'nu_0': 4.0,
         'kappa_0': 1.0,
         'lambda_0': np.eye(dim)
     }
