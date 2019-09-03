@@ -60,7 +60,7 @@ class bhc(object):
         assignment = [i for i in range(n_nodes)]
         self.assignments = [list(assignment)]
         rks = []
-
+        self.lmls = []
         while n_nodes > 1:
             if self.verbose:
                 sys.stdout.write("\r{0:d} of {1:d} ".format(n_nodes,
@@ -95,7 +95,7 @@ class bhc(object):
             self.assignments.append(list(assignment))
 
             n_nodes -= 1
-
+            self.lmls.append(denom)
         self.root_node = nodes[0]
         self.assignments = np.array(self.assignments)
 

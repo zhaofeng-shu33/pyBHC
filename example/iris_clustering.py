@@ -10,7 +10,7 @@ from pyBHC.dists import NormalInverseWishart
 from scipy.cluster.hierarchy import dendrogram
 import matplotlib.pyplot as plt
 
-def makeLinkageMatrix(asgn):
+def makeLinkageMatrix(asgn,lmls):
     N = len(asgn[0])
     Z = np.zeros((N-1,4),dtype=np.double)
     parents=dict([(i,i) for i in range(N)])
@@ -22,7 +22,8 @@ def makeLinkageMatrix(asgn):
             if L0[j] != L1[j] and parents[L0[j]]!= parents[L1[j]]:
                 Z[i,0] = parents[L0[j]]
                 Z[i,1] = parents[L1[j]]
-                Z[i,2] = i
+
+                Z[i,2] = np.fabs(lmls[i]) #-lmls[i+1] if i<N-2 else lmls[N-2]-lmls[N-3]
                 Z[i,3] = np.double(nleaves[parents[L0[j]]] + nleaves[parents[L1[j]]])
                 
                 parents[L0[j]]= N+i
@@ -43,7 +44,8 @@ if __name__ == '__main__':
     data_model = NormalInverseWishart(**hypers)    
     bhc_instance = bhc(feature, data_model)
     asgn = bhc_instance.assignments
-    print('len of data', asgn.shape)
-    Z = makeLinkageMatrix(asgn)
+    lmls = bhc_instance.lmls
+    print('len of data', asgn.shape[0], 'len of lml', len(lmls))
+    Z = makeLinkageMatrix(asgn, lmls)
     dn = dendrogram(Z)
     plt.show()
