@@ -1,7 +1,8 @@
 '''example program to cluster iris data using hbc'''
+import numpy as np
 from sklearn import datasets
 from pyBHC import bhc
-from dists import NormalInverseWishart
+from pyBHC.dists import NormalInverseWishart
 if __name__ == '__main__':
     feature, ground_truth = datasets.load_iris(return_X_y = True)
     dim = feature.shape[1]
