@@ -1,4 +1,8 @@
-'''example program to cluster iris data using hbc'''
+'''example program to cluster iris data using hbc
+   pyBHC library not support python 3 currently
+   use python 2.7 to run this example script
+   have patience to wait for the results
+'''
 import numpy as np
 from sklearn import datasets
 from pyBHC import bhc
